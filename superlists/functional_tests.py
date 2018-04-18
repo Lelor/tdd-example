@@ -29,10 +29,17 @@ class NewVisitor(unittest.TestCase):
         inputbox.send_keys(Keys.ENTER)
         sleep(1)
 
+        inputbox = self.browser.find_element_by_id('id_new_item')        
+        inputbox.send_keys('Use peacock feathers to make a fly')
+        inputbox.send_keys(Keys.ENTER)
+
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(any(row.text == '1: Buy peacock feathers' for row in rows, 
-                            'new to-do item did not appear in list'))
+        self.assertTrue(any(row.text == '1: Buy peacock feathers' for row in rows), 
+                        f'new to-do item did not appear in list, contents were:\n{table.text}')                
+        self.assertTrue(any(row.text == '2: USE peacock feathers to make a fly' for row in rows), 
+                        f'new to-do item did not appear in list, contents were:\n{table2.text}')
+
         self.fail('Finish the test!')
 
 
