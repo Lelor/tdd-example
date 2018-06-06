@@ -2,14 +2,23 @@
     <head>
         <title>To-Do lists</title>
     </head>
-    <body>
-        <h1>Your To-Do list</h1>
-    </body>
-    <form method="POST">
-        <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
-        {% csrf_token %}
-    </form>
-    <table id="id_list_table">
-        <tr><td>1: {{ new_item_text }}</td></tr>
-    </table>
+    <div style="text-align: center; width:10%">
+        <body>
+            <h1>Your To-Do list</h1>
+        </body>
+        <form method="POST">
+            <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
+            {% csrf_token %}
+        </form>
+        <table id="id_list_table" align="center" style="width:200%">
+            {% for item in items %}
+                <tr><td>{{ item.id }}: {{ item.text }}
+                    <form action="/remove_item" method="POST">
+                        <input name="id" value= {{ item.id }}>
+                        <button type="button" value= {{ item.id }}>delete</button>
+                    </form>
+                </td></tr>
+            {% endfor %}
+        </table>
+    </div>
 </html>

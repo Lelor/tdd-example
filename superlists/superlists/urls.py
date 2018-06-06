@@ -19,4 +19,5 @@ from lists import views
 
 urlpatterns = [
     path('', views.home_page),
+    path('remove_item', views.delete_list_item)
 ]
